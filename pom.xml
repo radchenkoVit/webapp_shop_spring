@@ -7,7 +7,103 @@
   <version>1.0-SNAPSHOT</version>
   <name>Mobile Web Shop</name>
 
+  <properties>
+    <spring.version>4.3.10.RELEASE</spring.version>
+    <spring.context>4.3.9.RELEASE</spring.context>
+    <spring.web>4.3.7.RELEASE</spring.web>
+    <spring.web.mvc>4.3.7.RELEASE</spring.web.mvc>
+    <spring.data.jpa>1.11.6.RELEASE</spring.data.jpa>
+    <hibarnate.core>5.2.10.Final</hibarnate.core>
+    <hibarnate.entiry.manager>5.0.12.Final</hibarnate.entiry.manager>
+    <jakson.databind>2.8.8</jakson.databind>
+    <servlet.api>3.1.0</servlet.api>
+    <jackson.mapper.asl>1.9.13</jackson.mapper.asl>
+    <h2.driver>1.4.196</h2.driver>
+  </properties>
+
   <dependencies>
+    <dependency>
+      <groupId>org.springframework</groupId>
+      <artifactId>spring-core</artifactId>
+      <version>${spring.version}</version>
+    </dependency>
+
+    <dependency>
+      <groupId>org.springframework</groupId>
+      <artifactId>spring-beans</artifactId>
+      <version>${spring.version}</version>
+    </dependency>
+
+    <dependency>
+      <groupId>org.springframework</groupId>
+      <artifactId>spring-context</artifactId>
+      <version>${spring.context}</version>
+    </dependency>
+
+    <dependency>
+      <groupId>org.springframework</groupId>
+      <artifactId>spring-web</artifactId>
+      <version>${spring.web}</version>
+    </dependency>
+
+    <dependency>
+      <groupId>org.springframework</groupId>
+      <artifactId>spring-webmvc</artifactId>
+      <version>${spring.web.mvc}</version>
+    </dependency>
+
+    <dependency>
+      <groupId>org.springframework.data</groupId>
+      <artifactId>spring-data-jpa</artifactId>
+      <version>${spring.data.jpa}</version>
+    </dependency>
+
+    <dependency>
+      <groupId>com.h2database</groupId>
+      <artifactId>h2</artifactId>
+      <version>${h2.driver}</version>
+    </dependency>
+
+    <dependency>
+      <groupId>org.hibernate</groupId>
+      <artifactId>hibernate-core</artifactId>
+      <version>${hibarnate.core}</version>
+    </dependency>
+
+    <dependency>
+      <groupId>org.hibernate</groupId>
+      <artifactId>hibernate-entitymanager</artifactId>
+      <version>${hibarnate.entiry.manager}</version>
+    </dependency>
+
+    <!-- https://mvnrepository.com/artifact/com.fasterxml.jackson.core/jackson-core -->
+    <dependency>
+      <groupId>com.fasterxml.jackson.core</groupId>
+      <artifactId>jackson-databind</artifactId>
+      <version>${jakson.databind}</version>
+    </dependency>
+
+    <!-- compile only, deployed container will provide this -->
+    <dependency>
+      <groupId>javax.servlet</groupId>
+      <artifactId>javax.servlet-api</artifactId>
+      <version>${servlet.api}</version>
+      <scope>provided</scope>
+    </dependency>
+
+
+    <dependency>
+      <groupId>org.codehaus.jackson</groupId>
+      <artifactId>jackson-mapper-asl</artifactId>
+      <version>${jackson.mapper.asl}</version>
+    </dependency>
+
+    <!-- https://mvnrepository.com/artifact/org.slf4j/slf4j-api -->
+    <dependency>
+      <groupId>org.slf4j</groupId>
+      <artifactId>slf4j-api</artifactId>
+      <version>1.7.25</version>
+    </dependency>
 
   </dependencies>
 
