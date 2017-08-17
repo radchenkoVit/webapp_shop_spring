@@ -3,6 +3,7 @@ package configure;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.data.jpa.repository.config.EnableJpaRepositories;
+import org.springframework.jdbc.datasource.DriverManagerDataSource;
 import org.springframework.jdbc.datasource.embedded.EmbeddedDatabaseBuilder;
 import org.springframework.jdbc.datasource.embedded.EmbeddedDatabaseType;
 import org.springframework.orm.jpa.JpaTransactionManager;
@@ -25,10 +26,26 @@ public class DBConfiguration {
     public DataSource dataSource(){
         return new EmbeddedDatabaseBuilder()
                 .setType(EmbeddedDatabaseType.H2)
-//                .addScript("sql_scripts/create.sql")
-//                .addScript("sql_scripts/generate_data.sql")
+                .addScript("sql_scripts/create.sql")
+                .addScript("sql_scripts/generate_data.sql")
                 .build();
     }
+
+
+//        // db stuff ---> TODO: checkout how it works, need to add creating db each time
+//    @Bean
+//    public DataSource dataSource(){
+//        String DB_DRIVER = "org.h2.Driver";
+//        String DB_URL = "jdbc:h2:~/gamingShop";
+//        String DB_USERNAME = "root";
+//        String DB_PASSWORD = "root";
+//
+//        DriverManagerDataSource driverManagerDataSource = new DriverManagerDataSource(DB_URL, DB_USERNAME, DB_PASSWORD);
+//        driverManagerDataSource.setDriverClassName(DB_DRIVER);
+//        return driverManagerDataSource;
+//
+//        //return new EmbeddedDatabaseBuilder().setType(EmbeddedDatabaseType.H2).build();
+//    }
 
     @Bean
     public LocalContainerEntityManagerFactoryBean entityManagerFactory() {
