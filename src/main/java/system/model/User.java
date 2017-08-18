@@ -23,7 +23,7 @@ public class User {
 //    @Column(name = "EMAIL", nullable = false)
 //    private String email;
 
-    @ManyToMany(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+    @ManyToMany(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
     @JoinTable(
             name = "USERS_APPLICATIONS",
             joinColumns = @JoinColumn(name = "USER_ID"),
