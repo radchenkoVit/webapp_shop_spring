@@ -1,5 +1,7 @@
 package system.controller;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Controller;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -15,6 +17,8 @@ import java.util.List;
 @RequestMapping("/users")
 public class UserController {
 
+    private Logger LOG = LoggerFactory.getLogger(UserController.class);
+
     @Autowired
     UserService service;
 
@@ -24,6 +28,7 @@ public class UserController {
     @RequestMapping(value = "/all", method = RequestMethod.GET)
     public @ResponseBody
     List<User> getAllUsers() {
+        LOG.debug("End point /all is reached");
         return service.getAll();
     }
 }

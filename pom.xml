@@ -19,6 +19,8 @@
     <servlet.api>3.1.0</servlet.api>
     <jackson.mapper.asl>1.9.13</jackson.mapper.asl>
     <h2.driver>1.4.196</h2.driver>
+    <jcl.slf4j.version>1.7.25</jcl.slf4j.version>
+    <logback.version>1.1.3</logback.version>
   </properties>
 
   <dependencies>
@@ -98,11 +100,19 @@
       <version>${jackson.mapper.asl}</version>
     </dependency>
 
-    <!-- https://mvnrepository.com/artifact/org.slf4j/slf4j-api -->
+
+    <!-- 2. Bridge logging from JCL to SLF4j-->
     <dependency>
       <groupId>org.slf4j</groupId>
-      <artifactId>slf4j-api</artifactId>
-      <version>1.7.25</version>
+      <artifactId>jcl-over-slf4j</artifactId>
+      <version>${jcl.slf4j.version}</version>
+    </dependency>
+
+    <!-- 3. logback -->
+    <dependency>
+      <groupId>ch.qos.logback</groupId>
+      <artifactId>logback-classic</artifactId>
+      <version>${logback.version}</version>
     </dependency>
 
   </dependencies>
