@@ -2,8 +2,8 @@ package system.repository;
 
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
-import system.model.Application;
-import system.model.Category;
+import system.entity.Application;
+import system.entity.Category;
 
 import java.util.List;
 

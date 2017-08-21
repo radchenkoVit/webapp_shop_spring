@@ -3,8 +3,8 @@ package system.service;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import system.exceptions.ApplicationExistsException;
-import system.model.Application;
-import system.model.Category;
+import system.entity.Application;
+import system.entity.Category;
 import system.repository.ApplicationRepository;
 
 import java.util.List;

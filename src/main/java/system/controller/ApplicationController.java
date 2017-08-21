@@ -6,8 +6,8 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
 import system.exceptions.ApplicationExistsException;
-import system.model.Application;
-import system.model.Category;
+import system.entity.Application;
+import system.entity.Category;
 import system.repository.CategoryRepository;
 import system.service.ApplicationService;
 
