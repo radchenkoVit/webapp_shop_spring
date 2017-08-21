@@ -1,10 +1,13 @@
 package system.model;
 
 import javax.persistence.*;
+import java.io.Serializable;
 
 @Entity
 @Table(name = "ROLES")
-public class Role {
+public class Role implements Serializable {
+
+    private static final long serialVersionUID = 1L;
 
     @Id
     private int id;

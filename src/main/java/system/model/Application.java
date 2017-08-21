@@ -1,12 +1,15 @@
 package system.model;
 
 import javax.persistence.*;
+import java.io.Serializable;
 import java.util.List;
 import java.util.Set;
 
 @Entity
 @Table(name = "APPLICATIONS")
-public class Application {
+public class Application implements Serializable {
+
+    private static final long serialVersionUID = 1L;
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY) //TODO: check what strategy should be
@@ -15,7 +18,7 @@ public class Application {
     @Column(name = "NAME", nullable = false)
     private String name;
 
-    @ManyToMany(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
+    @ManyToMany(fetch = FetchType.EAGER)
     @JoinTable(
             name = "APPLICATIONS_CATEGORIES",
             joinColumns = @JoinColumn(name = "APPLICATION_ID"),
@@ -26,7 +29,7 @@ public class Application {
     @Column(name = "DOWNLOADED_TIMES")
     private int downloadedTimes;
 
-    @ManyToMany(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
+    @ManyToMany(fetch = FetchType.EAGER)
     @JoinTable(
             name = "USERS_APPLICATIONS",
             joinColumns = @JoinColumn(name = "USER_ID"),

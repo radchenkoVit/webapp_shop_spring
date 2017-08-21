@@ -1,17 +1,17 @@
 package system.model;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.Id;
-import javax.persistence.Table;
+import javax.persistence.*;
+import java.io.Serializable;
 
 @Entity
 @Table(name = "CATEGORIES")
-public class Category {
+public class Category implements Serializable {
+
+    private static final long serialVersionUID = 1L;
 
     @Id
     @Column(name = "ID", nullable = false)
-    private int id;
+    private Integer id;
 
     @Column(name = "NAME", nullable = false)
     private String name;
@@ -30,5 +30,23 @@ public class Category {
 
     public void setName(String name) {
         this.name = name;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+
+        Category category = (Category) o;
+
+        if (id != category.id) return false;
+        return name != null ? name.equals(category.name) : category.name == null;
+    }
+
+    @Override
+    public int hashCode() {
+        int result = id;
+        result = 31 * result + (name != null ? name.hashCode() : 0);
+        return result;
     }
 }
