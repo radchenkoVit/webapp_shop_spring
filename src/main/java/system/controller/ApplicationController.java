@@ -8,6 +8,7 @@ import org.springframework.web.servlet.ModelAndView;
 import system.exceptions.ApplicationExistsException;
 import system.entity.Application;
 import system.entity.Category;
+import system.model.ApplicationFE;
 import system.repository.CategoryRepository;
 import system.service.ApplicationService;
 
@@ -32,7 +33,7 @@ public class ApplicationController {
 
     //TODO: very simplified
     //TODO: NOTE @RequestParam(value = "appName") value corresponds to 'name' attribute in html tag, example: name="appName"
-    @PostMapping(path = "/add", consumes = MediaType.APPLICATION_FORM_URLENCODED_VALUE)
+    @PostMapping(path = "/add")//, consumes = MediaType.APPLICATION_JSON_VALUE)
     public @ResponseBody
     ModelAndView addApplication(@RequestParam(value = "appName") String applicationName,
                                 @RequestParam(value = "appDesc") String appDescription,
