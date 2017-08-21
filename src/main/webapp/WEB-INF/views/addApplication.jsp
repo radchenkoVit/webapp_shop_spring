@@ -1,5 +1,6 @@
-<%@ taglib prefix="spring" uri="http://www.springframework.org/tags/form" %>
-<%@ taglib prefix="form" uri="http://www.springframework.org/tags/form" %>
+<%--<%@ taglib prefix="spring" uri="http://www.springframework.org/tags/form" %>--%>
+<%--<%@ taglib prefix="form" uri="http://www.springframework.org/tags/form" %>--%>
+<%@ taglib prefix = "c" uri = "http://java.sun.com/jsp/jstl/core" %>
 <%--
   Created by IntelliJ IDEA.
   User: vradchenko
@@ -8,6 +9,7 @@
   To change this template use File | Settings | File Templates.
 --%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
+
 <!DOCTYPE>
 <html>
 <head>
@@ -39,6 +41,12 @@
     <%--container for adding application--%>
     <div class="container">
         <h3>Add your application here:</h3>
+
+        <div class="container">
+            <c:if test="${ not empty message}">
+                <p>${message}</p>
+            </c:if>
+        </div>
 
         <form action="/webshop/applications/add" method="post" class="col-sm-4">
             <div class="form-group">
