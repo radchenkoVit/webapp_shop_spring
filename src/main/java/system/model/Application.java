@@ -18,6 +18,9 @@ public class Application implements Serializable {
     @Column(name = "NAME", nullable = false)
     private String name;
 
+    @Column(name = "DESCRIPTION")
+    private String description;
+
     @ManyToMany(fetch = FetchType.EAGER)
     @JoinTable(
             name = "APPLICATIONS_CATEGORIES",
@@ -68,5 +71,13 @@ public class Application implements Serializable {
 
     public void setUsers(Set<User> users) {
         this.users = users;
+    }
+
+    public String getDescription() {
+        return description;
+    }
+
+    public void setDescription(String description) {
+        this.description = description;
     }
 }

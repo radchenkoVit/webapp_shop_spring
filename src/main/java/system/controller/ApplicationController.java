@@ -40,6 +40,7 @@ public class ApplicationController {
 
         Application application = new Application();
         application.setName(applicationName);
+        application.setDescription(appDescription);
 
         List<Category> categoriesTest = categoryRepository.findAllByName(categories);
         application.setCategories(categoriesTest);
@@ -50,7 +51,7 @@ public class ApplicationController {
             return new ModelAndView("error", "message", String.format("Failed to add: %s", application.getName()));
         }
 
-        ModelAndView errorView = new ModelAndView("addApplication", "message", String.format("Application \"%s\" was added", application.getName()));
-        return errorView;
+        ModelAndView addAppicationView = new ModelAndView("addApplication", "message", String.format("Application \"%s\" was added", application.getName()));
+        return addAppicationView;
     }
 }
