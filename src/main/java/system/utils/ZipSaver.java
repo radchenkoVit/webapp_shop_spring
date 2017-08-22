@@ -32,27 +32,11 @@ public class ZipSaver {
         if (pictureFiles != null && pictureFiles.length == 0) throw new RuntimeException("No pictures file inside app folder");
         filterFiles(pictureFiles, "pictures");
 
-
-
-
-//        Arrays.stream(files).forEach(descFile -> {
-//            String copy = Paths.get(descFile.getParentFile().getAbsolutePath(), "description", descFile.getName()).toAbsolutePath().toString();
-//            File descFileCopy = new File(copy);
-//            try {
-//                FileUtils.copyFile(descFile, descFileCopy);
-//                if (!descFile.delete()){
-//                    //TODO:
-//                }
-//            } catch (IOException e) {
-//                e.printStackTrace();//TODO LOG exception here
-//            }
-//        });
-
     }
 
-    private static void filterFiles(File[] files, String moveFolderName){
+    private static void filterFiles(File[] files, String filterDirName){
         Arrays.stream(files).forEach(fileSource -> {
-            String path = Paths.get(fileSource.getParentFile().getAbsolutePath(), moveFolderName, fileSource.getName()).toAbsolutePath().toString();
+            String path = Paths.get(fileSource.getParentFile().getAbsolutePath(), filterDirName, fileSource.getName()).toAbsolutePath().toString();
             File descFileCopy = new File(path);
             try {
                 FileUtils.copyFile(fileSource, descFileCopy);
