@@ -21,6 +21,9 @@ public class Application implements Serializable {
     @Column(name = "DESCRIPTION")
     private String description;
 
+    @Column(name = "FILES_PATH")
+    private String filesPath;
+
     @ManyToMany(fetch = FetchType.EAGER)
     @JoinTable(
             name = "APPLICATIONS_CATEGORIES",
@@ -79,5 +82,13 @@ public class Application implements Serializable {
 
     public void setDescription(String description) {
         this.description = description;
+    }
+
+    public String getFilesPath() {
+        return filesPath;
+    }
+
+    public void setFilesPath(String filesPath) {
+        this.filesPath = filesPath;
     }
 }

@@ -1,9 +1,12 @@
 package system.controller;
 
+import net.lingala.zip4j.exception.ZipException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.MediaType;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.ModelAndView;
 import system.exceptions.ApplicationExistsException;
 import system.entity.Application;
@@ -12,6 +15,7 @@ import system.model.ApplicationFE;
 import system.repository.CategoryRepository;
 import system.service.ApplicationService;
 
+import java.io.IOException;
 import java.util.List;
 
 @Controller
@@ -37,7 +41,8 @@ public class ApplicationController {
     public @ResponseBody
     ModelAndView addApplication(@RequestParam(value = "appName") String applicationName,
                                 @RequestParam(value = "appDesc") String appDescription,
-                                @RequestParam(value = "categories") List<String> categories){
+                                @RequestParam(value = "categories") List<String> categories,
+                                @RequestParam(value = "appUpload") MultipartFile file){
 
         Application application = new Application();
         application.setName(applicationName);
@@ -47,8 +52,8 @@ public class ApplicationController {
         application.setCategories(categoriesTest);
 
         try {
-            applicationService.saveApplication(application);
-        } catch (ApplicationExistsException e) {
+            applicationService.saveApplication(application, file);
+        } catch (ApplicationExistsException | IOException | ZipException e) {
             return new ModelAndView("error", "message", String.format("Failed to add: %s", application.getName()));
         }
 

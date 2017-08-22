@@ -48,10 +48,10 @@
             </c:if>
         </div>
 
-        <form action="/webshop/applications/add" method="post" class="col-sm-4">
+        <form action="/webshop/applications/add" method="post" class="col-sm-4" enctype="multipart/form-data">
             <div class="form-group">
                 <label for="appName">Name:</label>
-                <input class="form-control" id="appName" placeholder="Enter application name" name="appName" required autofocus>
+                <input class="form-control" id="appName" placeholder="Enter application name" name="appName" required autofocus/>
             </div>
 
             <div class="form-group">
@@ -65,6 +65,11 @@
                     <option>Games</option>
                     <option>Education</option>
                 </select>
+            </div>
+
+            <div class="form-group">
+                <label for="appUpload">Select a file to upload</label>
+                <input type="file" class="form-control" id="appUpload" name="appUpload"/>
             </div>
             <button type="submit" class="btn btn-default right">Submit</button>
         </form>
