@@ -66,4 +66,12 @@ public class ApplicationController {
         applicationService.downloadApp(response, Long.valueOf(appId));
 
     }
+//
+//    @PostMapping(path = "/download/{appId}")
+//    public void download2(HttpServletResponse response,
+//                         @PathVariable("appId") String appId){
+//        applicationService.downloadApp(response, Long.valueOf(appId));
+//
+//
+//    }
 }

@@ -89,6 +89,8 @@ public class ApplicationService {
         {
             Files.copy(file, response.getOutputStream());
             response.getOutputStream().flush();
+            application.setDownloadedTimes(application.getDownloadedTimes() + 1);//TODO: increase downloading time
+            appRepository.saveAndFlush(application);
         }
         catch (IOException ex) {
             ex.printStackTrace();
