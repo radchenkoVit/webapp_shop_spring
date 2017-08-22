@@ -39,18 +39,24 @@ public class ApplicationService {
             throw new ApplicationExistsException(String.format("Application with name: %s already exists", applicationName));
         }
 
-        //convert files MultipartFile(Spring) to Java File
-        File tempConvFile = new File(file.getOriginalFilename());
-        file.transferTo(tempConvFile); // transfer files from UI to project location
 
-        //extract file to correct directory
-        String appFilesPath = ZipSaver.extract(tempConvFile);
-        ZipSaver.filter(appFilesPath);
+        File tempConvFile = null;
+        String appFilesPath;
+        try {
+            //convert files MultipartFile(Spring) to Java File
+            tempConvFile = new File(file.getOriginalFilename());
+            file.transferTo(tempConvFile); // transfer files from UI to project location
 
-        // delete temp file
-        if (tempConvFile.delete()){ // delete file here
-            logger.debug(String.format("File %s is not deleted", tempConvFile.getName()));
+            //extract file to correct directory
+            appFilesPath = ZipSaver.extract(tempConvFile);
+            ZipSaver.filter(appFilesPath);
+        } finally {
+            // delete temp file
+            if (tempConvFile != null && tempConvFile.delete()){ // delete file here
+                logger.debug(String.format("File %s is not deleted", tempConvFile.getName()));
+            }
         }
+
 
         application.setFilesPath(appFilesPath);
         return appRepository.save(application);

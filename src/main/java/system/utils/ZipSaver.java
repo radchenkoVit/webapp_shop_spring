@@ -24,13 +24,13 @@ public class ZipSaver {
         FileFilter descriptionFilter = new WildcardFileFilter("*.txt");
         File[] files = appDirectory.listFiles(descriptionFilter);
         if (files != null && files.length == 0) throw new RuntimeException("No description file inside app folder");
-        filterFiles(files, "description", descriptionFilter);
+        filterFiles(files, "description");
 
 
         FileFilter pictureFilter = new WildcardFileFilter("*.jpg");
         File[] pictureFiles = appDirectory.listFiles(pictureFilter);
         if (pictureFiles != null && pictureFiles.length == 0) throw new RuntimeException("No pictures file inside app folder");
-        filterFiles(pictureFiles, "pictures", pictureFilter);
+        filterFiles(pictureFiles, "pictures");
 
 
 
@@ -50,10 +50,10 @@ public class ZipSaver {
 
     }
 
-    private static void filterFiles(File[] files, String moveFolderName, FileFilter filter){
+    private static void filterFiles(File[] files, String moveFolderName){
         Arrays.stream(files).forEach(fileSource -> {
-            String copy = Paths.get(fileSource.getParentFile().getAbsolutePath(), moveFolderName, fileSource.getName()).toAbsolutePath().toString();
-            File descFileCopy = new File(copy);
+            String path = Paths.get(fileSource.getParentFile().getAbsolutePath(), moveFolderName, fileSource.getName()).toAbsolutePath().toString();
+            File descFileCopy = new File(path);
             try {
                 FileUtils.copyFile(fileSource, descFileCopy);
                 if (!fileSource.delete()){
@@ -65,13 +65,16 @@ public class ZipSaver {
         });
     }
 
-    public static String extract(File sourceFile) throws ZipException {
+    public static String extract(File sourceFile) throws ZipException, IOException {
         ZipFile zipFile = new ZipFile(sourceFile);
         if (!zipFile.isValidZipFile()){
             throw new ZipException("Not valid zip file");
         }
         String appPath = Paths.get(appsFolderPath, UUID.randomUUID().toString()).toAbsolutePath().toString();
+
         zipFile.extractAll(appPath);
+        File dir = new File(appPath);
+        FileUtils.copyFileToDirectory(sourceFile, dir); //TODO: split it
 
         return appPath;
     }
