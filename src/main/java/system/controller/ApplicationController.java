@@ -2,19 +2,18 @@ package system.controller;
 
 import net.lingala.zip4j.exception.ZipException;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.MediaType;
 import org.springframework.stereotype.Controller;
-import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.ModelAndView;
-import system.exceptions.ApplicationExistsException;
 import system.entity.Application;
 import system.entity.Category;
-import system.model.ApplicationFE;
+import system.exceptions.ApplicationExistsException;
 import system.repository.CategoryRepository;
 import system.service.ApplicationService;
 
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.util.List;
 
@@ -59,5 +58,12 @@ public class ApplicationController {
 
         ModelAndView addAppicationView = new ModelAndView("addApplication", "message", String.format("Application \"%s\" was added", application.getName()));
         return addAppicationView;
+    }
+
+    @PostMapping(path = "/download")
+    public void download(HttpServletResponse response,
+                         @RequestParam("appId") String appId){
+        applicationService.downloadApp(response, Long.valueOf(appId));
+
     }
 }

@@ -31,6 +31,7 @@ public class AppConfiguration extends WebMvcConfigurerAdapter {
     public void addViewControllers(ViewControllerRegistry registry) {
         //registry.addViewController("/").setViewName("index");
         registry.addViewController("addDeveloper.html").setViewName("addApplication");
+        registry.addViewController("download.html").setViewName("downloadPage");
     }
 
     @Bean(name = "multipartResolver")
