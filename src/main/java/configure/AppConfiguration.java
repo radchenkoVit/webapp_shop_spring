@@ -29,7 +29,7 @@ public class AppConfiguration extends WebMvcConfigurerAdapter {
     //It's mapping between jsp view pages to url paths, example: / --> localhost:9999/gaming-shop/ --> show 'index.jsp' page
     @Override
     public void addViewControllers(ViewControllerRegistry registry) {
-        //registry.addViewController("/").setViewName("index");
+        registry.addViewController("/").setViewName("index");
         registry.addViewController("addDeveloper.html").setViewName("addApplication");
         registry.addViewController("download.html").setViewName("downloadPage");
     }

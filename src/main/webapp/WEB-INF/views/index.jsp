@@ -13,6 +13,47 @@
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+
+
+    <script>
+        $(function () {
+
+            var $applications = $('#applications');
+
+            function addApplication(app) {
+                $applications.append('<li>app name: ' + app.name + ', app id: ' + app.id + '</li>' +
+                    '<br/><button id="download" class="download" data-id=' + app.id + '> DownloadApp</button>');
+            }
+
+
+           $.ajax({
+              type: 'GET',
+              url: "/webshop/applications/all",
+              success: function (applications) {
+                  $.each(applications, function (i, app) {
+                      addApplication(app);
+                  });
+              },
+               error: function (message) {
+                   console.log('Failed to load application, error: ' + message);
+               }
+           });
+
+
+            $applications.delegate('.download', 'click', function () {
+                var value = $(this).attr('data-id');
+                $.ajax({
+                   type: "GET",
+                    url: '/webshop/applications/download/' + value,
+                    success: function () {
+                        window.location = '/webshop/applications/download/' + value;
+                    }
+                });
+            })
+
+
+        });
+    </script>
 </head>
 <body>
 
@@ -37,6 +78,12 @@
 <%--container for adding application--%>
 <div class="container">
     <h3>Add your application here:</h3>
+
+    <div class="container">
+        <ul id="applications">
+
+        </ul>
+    </div>
 
     <div class="container">
         <table class="table table-striped">

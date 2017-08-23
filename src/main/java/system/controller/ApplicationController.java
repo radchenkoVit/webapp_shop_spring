@@ -2,6 +2,7 @@ package system.controller;
 
 import net.lingala.zip4j.exception.ZipException;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
@@ -66,12 +67,11 @@ public class ApplicationController {
         applicationService.downloadApp(response, Long.valueOf(appId));
 
     }
-//
-//    @PostMapping(path = "/download/{appId}")
-//    public void download2(HttpServletResponse response,
-//                         @PathVariable("appId") String appId){
-//        applicationService.downloadApp(response, Long.valueOf(appId));
-//
-//
-//    }
+
+    @GetMapping(path = "/download/{appId}")
+    @ResponseStatus(HttpStatus.OK)
+    public void download2(HttpServletResponse response,
+                         @PathVariable("appId") String appId){
+        applicationService.downloadApp(response, Long.valueOf(appId));
+    }
 }
