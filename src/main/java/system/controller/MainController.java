@@ -24,10 +24,12 @@ public class MainController {
     public ModelAndView init(){
         ModelAndView base = new ModelAndView();
         List<Application> applications = applicationService.getAll();
-        List<String> categories = categoryService.getCategoriesName();
+        List<Category> categories = categoryService.getAll();
+        List<Application> appCategories = applicationService.getApplication(categories.get(0)); // all applications by this category
 
         base.addObject("applications", applications);
         base.addObject("categories", categories);
+        base.addObject("applications_categories", appCategories);
         base.setViewName("index");
 
         return base;

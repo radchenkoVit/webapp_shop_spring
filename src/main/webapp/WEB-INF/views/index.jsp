@@ -11,6 +11,7 @@
 <head>
     <title>Add application page</title>
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+    <link rel="stylesheet" href="<c:url value='/resources/css/index.css'/>">
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
     <script type="text/javascript" src="<c:url value='/resources/script/displayApplications.js'/>"></script>
@@ -35,26 +36,15 @@
 </nav>
 <%--navigation bar ends--%>
 
-<%--&lt;%&ndash;container for adding application&ndash;%&gt;--%>
-<%--<div class="container">--%>
-    <%--<h3>List of all applications:</h3>--%>
-
-    <%--<div class="container">--%>
-        <%--<ul id="applications">--%>
-
-        <%--</ul>--%>
-    <%--</div>--%>
-
-
-
-    <div class="container text-center" id="applications">
+    <div class="container-fluid text-center" id="applications">
         <c:if test="${ not empty applications}">
-            <div class="row-sm-10">
+            <div class="row">
                     <c:forEach var="application" items="${applications}">
                         <div class="col-sm-2">
                             <div class="panel panel-primary">
                                 <div class="panel-heading"><c:out value="${application.name}"/></div>
-                                <div class="panel-body"><img src="/webshop/applications/picture/<c:out value="${application.id}"/>/main" style="width:130px;height:120px;"></div>
+                                <div class="panel-body"><img class="img-rounded img-responsive" src="/webshop/applications/picture/<c:out value="${application.id}"/>/main" style="width:128px;height:128px;"></div>
+                                <%--<div class="panel-body"><img class="img-rounded img-responsive" src="/webshop/applications/picture/<c:out value="${application.id}"/>/main" style="width:100%" ></div>--%>
                                 <div class="panel-footer"><c:out value="${application.getCategoriesName()}"></c:out></div>
                             </div>
                         </div>
@@ -63,19 +53,30 @@
         </c:if>
     </div>
 
-    <div class="container text-center">
-        <div class="row">
-            <div class="col-sm-3 well">
-                <ul>
-                    <c:forEach var="category" items="${categories}">
-                        <li><c:out value="${category}"/></li>
-                    </c:forEach>
-                </ul>
+<br/>
+<br/>
+<br/>
+
+    <div class="row">
+        <div class="col-sm-2">
+            <ul>
+                <c:forEach var="category" items="${categories}">
+                    <li data-id="<c:out value="${category.id}"/>"><c:out value="${category.name}"/></li>
+                </c:forEach>
+            </ul>
+        </div>
+
+        <div class="col-sm-9">
+            <div class="mycontent-right">
+                <c:forEach var="app" items="${applications_categories}">
+                    <ul>
+                        <li>App name: <c:out value="${app.name}"/></li>
+                        <li>App description: <c:out value="${app.description}"/></li>
+                    </ul>
+                </c:forEach>
             </div>
         </div>
     </div>
-
-<%--</div>--%>
 
 </body>
 
