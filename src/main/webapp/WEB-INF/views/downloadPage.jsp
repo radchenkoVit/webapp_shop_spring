@@ -9,23 +9,6 @@
 <html>
 <head>
     <title>Download page</title>
-    <%--<script>--%>
-        <%--$(document).ready(function() {--%>
-            <%--$('#download').click(function(){--%>
-                <%--$.ajax({--%>
-                    <%--type: "POST",--%>
-                    <%--url: "/webshop/applications/download/",--%>
-                    <%--data: "appId=2",--%>
-                    <%--success : function () {--%>
-                        <%--console.log("passed");--%>
-                    <%--},--%>
-                    <%--error: function (error) {--%>
-                        <%--console.log("failed");--%>
-                    <%--}--%>
-                <%--});--%>
-            <%--});--%>
-        <%--});--%>
-    <%--</script>--%>
 </head>
 <body>
     <div class="form-container">

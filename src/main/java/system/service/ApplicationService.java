@@ -95,4 +95,32 @@ public class ApplicationService {
             ex.printStackTrace();
         }
     }
+
+    public byte[] getPicture(Long appId) throws IOException {
+        Application application = appRepository.findOne(appId);
+
+        File appDir = new File(application.getFilesPath());
+        File picture = getMainPicture(appDir);
+        return Files.readAllBytes(Paths.get(picture.getAbsolutePath()));
+//        FileFilter filter = new WildcardFileFilter("/pictures/*.jpg");
+//        File files[] = appDir.listFiles(filter);
+//
+//        if (files != null && files.length == 0) throw new RuntimeException("No picture found files found");
+//        return Files.readAllBytes(Paths.get(files[0].getAbsolutePath()));
+    }
+
+    public File getMainPicture(File appDir){
+        File[] files = appDir.listFiles();
+
+        if (files != null && files.length == 0) throw new RuntimeException("No files");
+
+        for (int i = 0; i < files.length; i++){
+            File file = files[i];
+            if (file.isDirectory() && file.getName().equalsIgnoreCase("pictures")){
+                return file.listFiles()[0];
+            }
+        }
+
+        throw new RuntimeException("No Pictures is found");
+    }
 }

@@ -17,6 +17,7 @@ import java.util.UUID;
 
 public class ZipSaver {
     private static Logger logger = LoggerFactory.getLogger(ZipSaver.class);
+    //Paths.get("src", "main", "webapp", "resources").toFile().getAbsolutePath() - as an option for saving application data
     private static final String appsFolderPath = Paths.get("applicationData", "apps").toAbsolutePath().toString();
 
     public static void filter(String path){
@@ -58,7 +59,8 @@ public class ZipSaver {
         String appPath = Paths.get(appsFolderPath, UUID.randomUUID().toString()).toAbsolutePath().toString();
 
         zipFile.extractAll(appPath);
-        File dir = new File(appPath);
+
+        File dir = new File(appPath); //copy zip file to extracted application directory
         FileUtils.copyFileToDirectory(sourceFile, dir); //TODO: split it
 
         return appPath;

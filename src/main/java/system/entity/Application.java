@@ -2,8 +2,10 @@ package system.entity;
 
 import javax.persistence.*;
 import java.io.Serializable;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Set;
+import java.util.stream.Collectors;
 
 @Entity
 @Table(name = "APPLICATIONS")
@@ -57,6 +59,10 @@ public class Application implements Serializable {
 
     public void setName(String name) {
         this.name = name;
+    }
+
+    public List<String> getCategoriesName(){
+        return categories.stream().map(Category::getName).collect(Collectors.toList());
     }
 
     public List<Category> getCategories() {

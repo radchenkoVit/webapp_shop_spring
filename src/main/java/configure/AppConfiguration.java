@@ -31,7 +31,7 @@ public class AppConfiguration extends WebMvcConfigurerAdapter {
     @Override
     public void addViewControllers(ViewControllerRegistry registry) {
         registry.addViewController("/").setViewName("index");
-        registry.addViewController("addDeveloper.html").setViewName("addApplication");
+        registry.addViewController("addApplication.html").setViewName("addApplication");
         registry.addViewController("download.html").setViewName("downloadPage");
     }
 

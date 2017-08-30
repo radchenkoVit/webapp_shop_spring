@@ -35,30 +35,47 @@
 </nav>
 <%--navigation bar ends--%>
 
-<%--container for adding application--%>
-<div class="container">
-    <h3>Add your application here:</h3>
+<%--&lt;%&ndash;container for adding application&ndash;%&gt;--%>
+<%--<div class="container">--%>
+    <%--<h3>List of all applications:</h3>--%>
 
-    <div class="container">
-        <ul id="applications">
+    <%--<div class="container">--%>
+        <%--<ul id="applications">--%>
 
-        </ul>
+        <%--</ul>--%>
+    <%--</div>--%>
+
+
+
+    <div class="container text-center" id="applications">
+        <c:if test="${ not empty applications}">
+            <div class="row-sm-10">
+                    <c:forEach var="application" items="${applications}">
+                        <div class="col-sm-2">
+                            <div class="panel panel-primary">
+                                <div class="panel-heading"><c:out value="${application.name}"/></div>
+                                <div class="panel-body"><img src="/webshop/applications/picture/<c:out value="${application.id}"/>/main" style="width:130px;height:120px;"></div>
+                                <div class="panel-footer"><c:out value="${application.getCategoriesName()}"></c:out></div>
+                            </div>
+                        </div>
+                    </c:forEach>
+            </div>
+        </c:if>
     </div>
 
-    <div class="container">
-        <table class="table table-striped">
-            <c:if test="${ not empty applications}">
-                <c:forEach var="application" items="${applications}">
-                    <tr><td>Application Name</td><td><c:out value="${application.name}"/></td></tr>
-                    <c:if test="${not empty application.description}">
-                        <tr><td>Application Description</td><td><c:out value="${application.description}"/></td></tr>
-                    </c:if>
-                </c:forEach>
-            </c:if>
-        </table>
+    <div class="container text-center">
+        <div class="row">
+            <div class="col-sm-3 well">
+                <ul>
+                    <c:forEach var="category" items="${categories}">
+                        <li><c:out value="${category}"/></li>
+                    </c:forEach>
+                </ul>
+            </div>
+        </div>
     </div>
 
-</div>
+<%--</div>--%>
 
 </body>
 

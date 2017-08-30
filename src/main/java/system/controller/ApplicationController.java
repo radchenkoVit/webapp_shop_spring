@@ -13,7 +13,6 @@ import system.exceptions.ApplicationExistsException;
 import system.repository.CategoryRepository;
 import system.service.ApplicationService;
 
-import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.util.List;
@@ -73,5 +72,22 @@ public class ApplicationController {
     public void download2(HttpServletResponse response,
                          @PathVariable("appId") String appId){
         applicationService.downloadApp(response, Long.valueOf(appId));
+    }
+
+    @PostMapping(path = "/picture/{appId}/preview")
+    @ResponseStatus(HttpStatus.OK)
+    public @ResponseBody byte[] previewPicture(){
+
+
+
+        //TODO:
+        return null;
+    }
+
+    @GetMapping(path = "/picture/{appId}/main")
+    @ResponseStatus(HttpStatus.OK)
+    public @ResponseBody byte[] mainPicture(@PathVariable("appId") String appId) throws IOException {
+        byte[] picture = applicationService.getPicture(Long.valueOf(appId));
+        return picture;
     }
 }
