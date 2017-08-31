@@ -43,8 +43,8 @@
                         <div class="col-sm-2">
                             <div class="panel panel-primary">
                                 <div class="panel-heading"><c:out value="${application.name}"/></div>
-                                <div class="panel-body"><img class="img-rounded img-responsive" src="/webshop/applications/picture/<c:out value="${application.id}"/>/main" style="width:128px;height:128px;"></div>
-                                <%--<div class="panel-body"><img class="img-rounded img-responsive" src="/webshop/applications/picture/<c:out value="${application.id}"/>/main" style="width:100%" ></div>--%>
+                                <%--<div class="panel-body"><img class="img-rounded img-responsive" src="/webshop/applications/picture/<c:out value="${application.id}"/>/main" style="width:128px;height:128px;"></div>--%>
+                                <div class="panel-body"><img class="img-rounded img-responsive" src="/webshop/applications/picture/<c:out value="${application.id}"/>/main" style="width:100%" ></div>
                                 <div class="panel-footer"><c:out value="${application.getCategoriesName()}"></c:out></div>
                             </div>
                         </div>

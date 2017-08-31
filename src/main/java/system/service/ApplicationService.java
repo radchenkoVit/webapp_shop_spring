@@ -1,5 +1,6 @@
 package system.service;
 
+import net.coobird.thumbnailator.Thumbnails;
 import net.lingala.zip4j.exception.ZipException;
 import org.apache.commons.io.filefilter.WildcardFileFilter;
 import org.slf4j.Logger;
@@ -13,7 +14,9 @@ import system.exceptions.ApplicationExistsException;
 import system.repository.ApplicationRepository;
 import system.utils.ZipSaver;
 
+import javax.imageio.ImageIO;
 import javax.servlet.http.HttpServletResponse;
+import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.FileFilter;
 import java.io.IOException;
@@ -105,15 +108,21 @@ public class ApplicationService {
         return Files.readAllBytes(Paths.get(picture.getAbsolutePath()));
     }
 
-    private File getMainPicture(File appDir){
+    private File getMainPicture(File appDir) throws IOException {
         File[] files = appDir.listFiles();
 
         if (files != null && files.length == 0) throw new RuntimeException("No files");
 
+        File picture = null;
         for (int i = 0; i < files.length; i++){
             File file = files[i];
             if (file.isDirectory() && file.getName().equalsIgnoreCase("pictures")){
-                return file.listFiles()[0];
+                if (file.list().length != 0) {
+                    picture = file.listFiles()[0];
+                    return picture;
+                } else {
+                    throw new RuntimeException("No Pictures found");
+                }
             }
         }
 

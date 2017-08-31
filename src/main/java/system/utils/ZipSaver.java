@@ -1,5 +1,6 @@
 package system.utils;
 
+import net.coobird.thumbnailator.Thumbnails;
 import net.lingala.zip4j.core.ZipFile;
 import net.lingala.zip4j.exception.ZipException;
 import org.apache.commons.io.FileUtils;
@@ -7,10 +8,13 @@ import org.apache.commons.io.filefilter.WildcardFileFilter;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
+import javax.imageio.ImageIO;
+import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.FileFilter;
 import java.io.IOException;
 import java.nio.file.OpenOption;
+import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.util.Arrays;
 import java.util.UUID;
@@ -33,6 +37,15 @@ public class ZipSaver {
         File[] pictureFiles = appDirectory.listFiles(pictureFilter);
         if (pictureFiles != null && pictureFiles.length == 0) throw new RuntimeException("No pictures file inside app folder");
         filterFiles(pictureFiles, "pictures");
+
+        Path pictureFolder = Paths.get(appDirectory.getAbsolutePath(), "pictures");
+        Arrays.stream(pictureFolder.toFile().listFiles()).forEach(picture -> {
+            try {
+                resizeToPreviewPicture(picture);
+            } catch (IOException ignored) {
+                //TODO: better work with images exception
+            }
+        });
 
     }
 
@@ -64,6 +77,16 @@ public class ZipSaver {
         FileUtils.copyFileToDirectory(sourceFile, dir); //TODO: split it
 
         return appPath;
+    }
+
+    private static void resizeToPreviewPicture(File source) throws IOException {
+        BufferedImage thumbnail =
+                Thumbnails.of(source)
+                        .height(128)
+                        .width(128)
+                        .asBufferedImage();
+
+        ImageIO.write(thumbnail, "jpg", source);
     }
 
 }
