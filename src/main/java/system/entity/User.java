@@ -20,8 +20,8 @@ public class User implements Serializable {
 //    @Column(name = "LASTNAME")
 //    private String name;
 //
-//    @Column(name = "PASSWORD", nullable = false)
-//    private String password;
+    @Column(name = "PASS", nullable = false)
+    private String password;
 //
 //    @Column(name = "EMAIL", nullable = false)
 //    private String email;
@@ -60,5 +60,13 @@ public class User implements Serializable {
 
     public void setRole(Role role) {
         this.role = role;
+    }
+
+    public String getPassword() {
+        return password;
+    }
+
+    public void setPassword(String password) {
+        this.password = password;
     }
 }
