@@ -78,8 +78,6 @@ public class ZipSaver {
         }
         String appPath = Paths.get(appsFolderPath, UUID.randomUUID().toString()).toAbsolutePath().toString();
         zipFile.extractAll(appPath);
-//        File dir = new File(appPath); //copy zip file to extracted application directory
-//        FileUtils.copyFileToDirectory(sourceFile, dir); //TODO: split it
 
         return appPath;
     }

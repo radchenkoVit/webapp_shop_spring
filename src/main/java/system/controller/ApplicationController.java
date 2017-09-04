@@ -60,15 +60,9 @@ public class ApplicationController {
         return addAppicationView;
     }
 
-    @PostMapping(path = "/download")
-    public void download(HttpServletResponse response,
-                         @RequestParam("appId") String appId){
-        applicationService.downloadApplication(response, Long.valueOf(appId));
-    }
-
     @PostMapping(path = "/download/{appId}")
     @ResponseStatus(HttpStatus.OK)
-    public void download2(HttpServletResponse response,
+    public void download(HttpServletResponse response,
                          @PathVariable("appId") String appId){
         applicationService.downloadApplication(response, Long.valueOf(appId));
     }
