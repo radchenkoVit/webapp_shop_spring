@@ -23,4 +23,9 @@ $(function () {
         console.log("reached method");
         window.location.replace("/webshop/category?categoryId=" + idCategory);
     })
+
+    $categories.delegate('.app.body img', 'click', function () {
+        var appId = $(this).attr('data-id');
+        window.location.replace("/webshop/application?appId=" + appId);
+    })
 });

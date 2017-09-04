@@ -26,8 +26,8 @@
             <a class="navbar-brand" href="#">Application Data Art</a>
         </div>
         <ul class="nav navbar-nav">
-            <li><a href="#">Home</a></li>
-            <li class="active"><a href="#">New</a></li>
+            <li class="active"><a href="${pageContext.request.contextPath}/">Home</a></li>
+            <li ><a href="${pageContext.request.contextPath}/addApplication.html">Add Apllication</a></li>
         </ul>
         <ul class="nav navbar-nav navbar-right">
             <li><a href="#"><span class="glyphicon glyphicon-user"></span> Sign Up</a></li>
@@ -71,7 +71,7 @@
         <div class="mycontent-right" id="applications">
             <c:forEach var="app" items="${applications_by_category}">
                 <div class="app preview block">
-                    <div class="app body"><img class="img-rounded img-responsive" src="/webshop/picture/preview/<c:out value="${app.id}"/>" style="width:100%"></div>
+                    <div class="app body"><img data-id="<c:out value="${app.id}"/>" class="img-rounded img-responsive" src="/webshop/picture/preview/<c:out value="${app.id}"/>" style="width:100%"></div>
                     <div class="app title">App name: <c:out value="${app.name}"/>
                         <br/>Downloaded time: <c:out value="${app.downloadedTimes}"/><br/>
                         <button class="download" data-id="<c:out value="${app.id}"/>">Download</button>

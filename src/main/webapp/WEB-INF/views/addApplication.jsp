@@ -27,8 +27,8 @@
                 <a class="navbar-brand" href="#">Application Data Art</a>
             </div>
             <ul class="nav navbar-nav">
-                <li><a href="#">Home</a></li>
-                <li class="active"><a href="#">New</a></li>
+                <li><a href="${pageContext.request.contextPath}/">Home</a></li>
+                <li class="active"><a href="${pageContext.request.contextPath}/addApplication.html">Add Apllication</a></li>
             </ul>
             <ul class="nav navbar-nav navbar-right">
                 <li><a href="#"><span class="glyphicon glyphicon-user"></span> Sign Up</a></li>
