@@ -98,34 +98,4 @@ public class ApplicationService {
             logger.debug(String.format("Failed to send application, error: %s", e.getMessage()));
         }
     }
-
-    //TODO: make it better - getting images
-    public byte[] getPicture(Long appId) throws IOException {
-        Application application = appRepository.findOne(appId);
-
-        File appDir = new File(application.getFilesPath());
-        File picture = getMainPicture(appDir);
-        return Files.readAllBytes(Paths.get(picture.getAbsolutePath()));
-    }
-
-    private File getMainPicture(File appDir) throws IOException {
-        File[] files = appDir.listFiles();
-
-        if (files != null && files.length == 0) throw new RuntimeException("No files");
-
-        File picture = null;
-        for (int i = 0; i < files.length; i++){
-            File file = files[i];
-            if (file.isDirectory() && file.getName().equalsIgnoreCase("pictures")){
-                if (file.list().length != 0) {
-                    picture = file.listFiles()[0];
-                    return picture;
-                } else {
-                    throw new RuntimeException("No Pictures found");
-                }
-            }
-        }
-
-        throw new RuntimeException("No Pictures is found");
-    }
 }
