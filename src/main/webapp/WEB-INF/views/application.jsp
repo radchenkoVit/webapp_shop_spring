@@ -46,7 +46,7 @@
                         <div class="panel-heading"><c:out value="${application.name}"/></div>
                             <%--<div class="panel-body"><img class="img-rounded img-responsive" src="/webshop/applications/picture/<c:out value="${application.id}"/>/main" style="width:128px;height:128px;"></div>--%>
                         <div class="panel-body"><img class="img-rounded img-responsive" src="/webshop/picture/preview/<c:out value="${application.id}"/>" style="width:100%" ></div>
-                        <div class="panel-footer"><c:out value="${application.getCategoriesName()}"></c:out></div>
+                        <div class="panel-footer"><c:out value="${application.getCategoriesName()}"/></div>
                     </div>
                 </div>
             </c:forEach>
@@ -58,11 +58,16 @@
 
 <%--page body--%>
 <div class="container" id="application">
-    <c:if test="${not empty app}">
-        <div id="title"><c:out value="${app.name}"/></div>
-        <div id="image"><img class="img-rounded img-responsive" src="/webshop/picture/main/<c:out value="${app.id}"/>" style="width:100%" ></div>
-        <button class="download" data-id="<c:out value="${app.id}"/>">Download</button>
-    </c:if>
+    <div class="row">
+        <div class="col-sm-3">
+            <c:if test="${not empty app}">
+                <div id="title"><c:out value="${app.name}"/></div>
+                <div id="image"><img class="img-rounded img-responsive" src="/webshop/picture/main/<c:out value="${app.id}"/>" style="width:100%" ></div>
+                <p id="desc">Desription:<br/><c:out value="${app.description}"/></p>
+                <button class="btn btn-default download" data-id="<c:out value="${app.id}"/>">Download</button>
+            </c:if>
+        </div>
+    </div>
 </div>
 <%--end page body--%>
 
