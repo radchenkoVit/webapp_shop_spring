@@ -75,7 +75,7 @@ public class ApplicationService {
         return appRepository.save(application);
     }
 
-    public void downloadApp(HttpServletResponse response, Long appId){
+    public void downloadApplication(HttpServletResponse response, Long appId){
         Application application = appRepository.findOne(appId);
 
         File appDir = new File(application.getFilesPath());
@@ -83,16 +83,16 @@ public class ApplicationService {
         File files[] = appDir.listFiles(filter);
 
         if (files != null && files.length == 0) throw new RuntimeException("No zip files found");
-        Path file = Paths.get(files[0].getAbsolutePath()); //TODO using PATH under question?
+        Path file = Paths.get(files[0].getAbsolutePath());
 
         response.setContentType("application/zip");
-        response.setHeader( "Content-Disposition", "attachment; filename=application.zip");
+        response.setHeader( "Content-Disposition", String.format("attachment; filename=%s.zip", file.toFile().getName()));
         try
         {
             Files.copy(file, response.getOutputStream());
             response.getOutputStream().flush(); // send data throw http protocol
-            application.setDownloadedTimes(application.getDownloadedTimes() + 1);//TODO: increase downloading time
-            appRepository.saveAndFlush(application);
+            application.setDownloadedTimes(application.getDownloadedTimes() + 1);
+            appRepository.saveAndFlush(application);//save increased downloaded time to DB
         }
         catch (IOException e) {
             logger.debug(String.format("Failed to send application, error: %s", e.getMessage()));

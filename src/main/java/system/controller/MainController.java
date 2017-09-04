@@ -10,7 +10,9 @@ import system.entity.Category;
 import system.service.ApplicationService;
 import system.service.CategoryService;
 
+import javax.servlet.http.HttpServletRequest;
 import java.util.List;
+import java.util.Map;
 
 @Controller
 public class MainController {
@@ -36,13 +38,16 @@ public class MainController {
         return base;
     }
 
-    @GetMapping(path = "/category/{categotyId}")
-    public ModelAndView initCat(@PathVariable("categotyId") Integer categoryId){
+    @GetMapping(path = "/category")
+    public ModelAndView postMain(HttpServletRequest request){
+        Map<String, String[]> map = request.getParameterMap();
+        String categoryId = map.get("categoryId")[0];
+
         ModelAndView base = new ModelAndView();
         List<Application> applications = applicationService.getAll();
         List<Category> categories = categoryService.getAll();
 
-        Category category = categoryService.getBy(categoryId);
+        Category category = categoryService.getBy(Integer.parseInt(categoryId));
         List<Application> appCategories = applicationService.getApplication(category); // all applications by this category
 
         base.addObject("applications", applications);
