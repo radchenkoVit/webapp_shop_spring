@@ -1,23 +1,29 @@
 package initializer;
 
 import configure.AppConfiguration;
-import org.springframework.web.servlet.support.AbstractAnnotationConfigDispatcherServletInitializer;
+import org.springframework.web.WebApplicationInitializer;
+import org.springframework.web.context.ContextLoaderListener;
+import org.springframework.web.context.support.AnnotationConfigWebApplicationContext;
+import org.springframework.web.servlet.DispatcherServlet;
 
-public class WebAppInitializer extends
-        AbstractAnnotationConfigDispatcherServletInitializer {
+import javax.servlet.ServletContext;
+import javax.servlet.ServletRegistration;
 
-    @Override
-    protected Class<?>[] getServletConfigClasses() {
-        return new Class[] { AppConfiguration.class };
-    }
-
-    @Override
-    protected String[] getServletMappings() {
-        return new String[] { "/" };
-    }
+public class WebAppInitializer implements WebApplicationInitializer {
 
     @Override
-    protected Class<?>[] getRootConfigClasses() {
-        return null;
+    public void onStartup(ServletContext container) {
+        AnnotationConfigWebApplicationContext context
+                = new AnnotationConfigWebApplicationContext();
+        context.register(AppConfiguration.class);
+
+        container.addListener(new ContextLoaderListener(context));
+
+        ServletRegistration.Dynamic dispatcher = container
+                .addServlet("dispatcher", new DispatcherServlet(context));
+//        DelegatingFilterProxy filterProxy = new DelegatingFilterProxy("springSecurityFilterChain");
+
+        dispatcher.setLoadOnStartup(1);
+        dispatcher.addMapping("/");
     }
 }
