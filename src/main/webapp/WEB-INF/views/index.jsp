@@ -45,7 +45,7 @@
                     <div class="panel panel-primary">
                         <div class="panel-heading"><c:out value="${application.name}"/></div>
                             <%--<div class="panel-body"><img class="img-rounded img-responsive" src="/webshop/applications/picture/<c:out value="${application.id}"/>/main" style="width:128px;height:128px;"></div>--%>
-                        <div class="panel-body"><img class="img-rounded img-responsive" src="/webshop/applications/picture/<c:out value="${application.id}"/>/main" style="width:100%" ></div>
+                        <div class="panel-body"><img class="img-rounded img-responsive" src="/webshop/picture/preview/<c:out value="${application.id}"/>" style="width:100%" ></div>
                         <div class="panel-footer"><c:out value="${application.getCategoriesName()}"></c:out></div>
                     </div>
                 </div>
@@ -71,7 +71,7 @@
         <div class="mycontent-right" id="applications">
             <c:forEach var="app" items="${applications_by_category}">
                 <div class="app preview block">
-                    <div class="app body"><img class="img-rounded img-responsive" src="/webshop/applications/picture/<c:out value="${app.id}"/>/main" style="width:100%"></div>
+                    <div class="app body"><img class="img-rounded img-responsive" src="/webshop/picture/preview/<c:out value="${app.id}"/>" style="width:100%"></div>
                     <div class="app title">App name: <c:out value="${app.name}"/>
                         <br/>Downloaded time: <c:out value="${app.downloadedTimes}"/><br/>
                         <button class="download" data-id="<c:out value="${app.id}"/>">Download</button>

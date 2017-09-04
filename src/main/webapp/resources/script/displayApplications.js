@@ -21,6 +21,6 @@ $(function () {
     $categories.delegate('.pointer', 'click', function () {
         var idCategory = $(this).attr('data-id');
         console.log("reached method");
-        window.location.replace("/webshop/category?categoryId=" + idCategory);
+        window.location.replace("/webshop/category/" + idCategory);
     })
 });

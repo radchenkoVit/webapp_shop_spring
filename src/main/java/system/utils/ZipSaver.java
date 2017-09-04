@@ -40,10 +40,17 @@ public class ZipSaver {
 
         Path pictureFolder = Paths.get(appDirectory.getAbsolutePath(), "pictures");
         Arrays.stream(pictureFolder.toFile().listFiles()).forEach(picture -> {
+            String pictureName = picture.getName();
             try {
-                resizeToPreviewPicture(picture);
-            } catch (IOException ignored) {
-                //TODO: better work with images exception
+                if (pictureName.contains("128x128")){
+                    resizeToPreviewPicture(picture, 128, 128);
+                } else if (pictureName.contains("512x512")){
+                    resizeToPreviewPicture(picture, 512, 512);
+                } else {
+                    logger.info(String.format("Unknown format of image: %s", pictureName));
+                }
+            } catch (IOException e) {
+                logger.debug(String.format("Failed to resize image: %s", e.getMessage()));
             }
         });
 
@@ -70,20 +77,18 @@ public class ZipSaver {
             throw new ZipException("Not valid zip file");
         }
         String appPath = Paths.get(appsFolderPath, UUID.randomUUID().toString()).toAbsolutePath().toString();
-
         zipFile.extractAll(appPath);
-
-        File dir = new File(appPath); //copy zip file to extracted application directory
-        FileUtils.copyFileToDirectory(sourceFile, dir); //TODO: split it
+//        File dir = new File(appPath); //copy zip file to extracted application directory
+//        FileUtils.copyFileToDirectory(sourceFile, dir); //TODO: split it
 
         return appPath;
     }
 
-    private static void resizeToPreviewPicture(File source) throws IOException {
+    private static void resizeToPreviewPicture(File source, int height, int width) throws IOException {
         BufferedImage thumbnail =
                 Thumbnails.of(source)
-                        .height(128)
-                        .width(128)
+                        .height(height)
+                        .width(width)
                         .asBufferedImage();
 
         ImageIO.write(thumbnail, "jpg", source);

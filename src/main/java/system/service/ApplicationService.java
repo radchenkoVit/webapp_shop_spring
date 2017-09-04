@@ -1,6 +1,7 @@
 package system.service;
 
 import net.lingala.zip4j.exception.ZipException;
+import org.apache.commons.io.FileUtils;
 import org.apache.commons.io.filefilter.WildcardFileFilter;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -59,6 +60,8 @@ public class ApplicationService {
 
             //extract file to correct directory
             appFilesPath = ZipSaver.extract(tempConvFile);
+            //copy zip file to extracted application directory
+            FileUtils.copyFileToDirectory(tempConvFile, new File(appFilesPath));
             ZipSaver.filter(appFilesPath);
         } finally {
             // delete temp file
@@ -87,13 +90,12 @@ public class ApplicationService {
         try
         {
             Files.copy(file, response.getOutputStream());
-            response.getOutputStream().flush();
-            //TODO: BUG INCREASE DOWNLOADED TIMES TWICE
+            response.getOutputStream().flush(); // send data throw http protocol
             application.setDownloadedTimes(application.getDownloadedTimes() + 1);//TODO: increase downloading time
             appRepository.saveAndFlush(application);
         }
-        catch (IOException ex) {
-            ex.printStackTrace();
+        catch (IOException e) {
+            logger.debug(String.format("Failed to send application, error: %s", e.getMessage()));
         }
     }
 
