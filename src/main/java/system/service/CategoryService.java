@@ -18,6 +18,10 @@ public class CategoryService {
         return categoryRepository.findAll();
     }
 
+    public Category getBy(int id){
+        return categoryRepository.getOne(id);
+    }
+
     public List<String> getCategoriesName(){
         return categoryRepository.findAll().stream().map(Category::getName).collect(Collectors.toList());
     }

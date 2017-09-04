@@ -67,7 +67,7 @@ public class ApplicationController {
 
     }
 
-    @GetMapping(path = "/download/{appId}")
+    @PostMapping(path = "/download/{appId}")
     @ResponseStatus(HttpStatus.OK)
     public void download2(HttpServletResponse response,
                          @PathVariable("appId") String appId){

@@ -1,6 +1,5 @@
 package system.service;
 
-import net.coobird.thumbnailator.Thumbnails;
 import net.lingala.zip4j.exception.ZipException;
 import org.apache.commons.io.filefilter.WildcardFileFilter;
 import org.slf4j.Logger;
@@ -14,9 +13,7 @@ import system.exceptions.ApplicationExistsException;
 import system.repository.ApplicationRepository;
 import system.utils.ZipSaver;
 
-import javax.imageio.ImageIO;
 import javax.servlet.http.HttpServletResponse;
-import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.FileFilter;
 import java.io.IOException;
@@ -91,6 +88,7 @@ public class ApplicationService {
         {
             Files.copy(file, response.getOutputStream());
             response.getOutputStream().flush();
+            //TODO: BUG INCREASE DOWNLOADED TIMES TWICE
             application.setDownloadedTimes(application.getDownloadedTimes() + 1);//TODO: increase downloading time
             appRepository.saveAndFlush(application);
         }

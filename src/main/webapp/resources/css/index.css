@@ -1,3 +1,28 @@
 .mycontent-right {
     border-left: 2px solid #333;
+    padding-left: 15px;
+    height: 100%;
+}
+
+.pointer {
+    cursor:pointer;
+}
+
+.app.preview {
+    position: relative;
+    display: inline-block;
+    text-align: left;
+}
+
+.app.body {
+    display: inline-block;
+    width: 128px;
+    height: 128px;
+    float: left;
+    padding: 2px;
+}
+
+.app.title {
+    display: inline-block;
+    width: 300px; height: 100px;
 }
