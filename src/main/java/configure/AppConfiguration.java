@@ -15,7 +15,8 @@ import org.springframework.web.servlet.view.InternalResourceViewResolver;
 @EnableWebMvc
 @Configuration
 @ComponentScan({"system"})
-@Import({DBConfiguration.class})
+//@Import({DBConfiguration.class})
+@Import({SecurityConfig.class})
 public class AppConfiguration extends WebMvcConfigurerAdapter {
 
     // It's resolver for views looking for specific
@@ -31,6 +32,7 @@ public class AppConfiguration extends WebMvcConfigurerAdapter {
     @Override
     public void addViewControllers(ViewControllerRegistry registry) {
         registry.addViewController("/").setViewName("index");
+        registry.addViewController("/error").setViewName("error");
         registry.addViewController("addApplication.html").setViewName("addApplication");
         registry.addViewController("download.html").setViewName("downloadPage");
     }

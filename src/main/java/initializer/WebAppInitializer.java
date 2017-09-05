@@ -4,6 +4,7 @@ import configure.AppConfiguration;
 import org.springframework.web.WebApplicationInitializer;
 import org.springframework.web.context.ContextLoaderListener;
 import org.springframework.web.context.support.AnnotationConfigWebApplicationContext;
+import org.springframework.web.filter.DelegatingFilterProxy;
 import org.springframework.web.servlet.DispatcherServlet;
 
 import javax.servlet.ServletContext;
@@ -19,10 +20,11 @@ public class WebAppInitializer implements WebApplicationInitializer {
 
         container.addListener(new ContextLoaderListener(context));
 
+        DelegatingFilterProxy filterProxy = new DelegatingFilterProxy("springSecurityFilterChain");
+        container.addFilter("springSecurityFilterChain", filterProxy).addMappingForUrlPatterns(null, false, "/*");
+
         ServletRegistration.Dynamic dispatcher = container
                 .addServlet("dispatcher", new DispatcherServlet(context));
-//        DelegatingFilterProxy filterProxy = new DelegatingFilterProxy("springSecurityFilterChain");
-
         dispatcher.setLoadOnStartup(1);
         dispatcher.addMapping("/");
     }
