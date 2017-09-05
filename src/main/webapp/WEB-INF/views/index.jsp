@@ -30,12 +30,10 @@
             <li ><a href="${pageContext.request.contextPath}/addApplication.html">Add Apllication</a></li>
         </ul>
         <ul class="nav navbar-nav navbar-right">
-            <ul class="nav navbar-nav navbar-right">
-                <li><span class="glyphicon glyphicon-user"></span>${pageContext.request.userPrincipal.name}</li>
-                <li><a href="<c:url value="/logout" />"><span class="glyphicon glyphicon-log-in"></span>LogOut</a></li>
-            </ul>
             <%--<li><a href="#"><span class="glyphicon glyphicon-user"></span> Sign Up</a></li>--%>
             <%--<li><a href="#"><span class="glyphicon glyphicon-log-in"></span> Login</a></li>--%>
+            <li><a href=<span class="glyphicon glyphicon-user"></span>${pageContext.request.userPrincipal.name}</a></li>
+            <li><a href="<c:url value="/logout" />"><span class="glyphicon glyphicon-log-in"></span>LogOut</a></li>
         </ul>
     </div>
 </nav>
