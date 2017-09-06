@@ -25,7 +25,7 @@ public class MainController {
     @GetMapping(path = "/")
     public ModelAndView init(){
         ModelAndView mainPage = new ModelAndView();
-        List<Application> applications = applicationService.getAll();//TODO: should be most downloaded
+        List<Application> applications = applicationService.getTopApplications();
         List<Category> categories = categoryService.getAll();
         List<Application> appCategories = applicationService.getApplication(categories.get(0)); // all applications by this category
 
@@ -43,7 +43,7 @@ public class MainController {
         String categoryId = map.get("categoryId")[0];
 
         ModelAndView mainPage = new ModelAndView();
-        List<Application> applications = applicationService.getAll();//TODO: should be most downloaded
+        List<Application> applications = applicationService.getTopApplications();
         List<Category> categories = categoryService.getAll();
 
         Category category = categoryService.getBy(Integer.parseInt(categoryId));

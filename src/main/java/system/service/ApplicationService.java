@@ -6,6 +6,8 @@ import org.apache.commons.io.filefilter.WildcardFileFilter;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.cache.annotation.CacheEvict;
+import org.springframework.cache.annotation.Cacheable;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
 import system.entity.Application;
@@ -21,6 +23,7 @@ import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
+import java.util.Comparator;
 import java.util.List;
 
 @Service
@@ -31,6 +34,7 @@ public class ApplicationService {
     @Autowired
     private ApplicationRepository appRepository;
 
+    @Cacheable("all_applications")
     public List<Application> getAll(){
         return appRepository.findAll();
     }
@@ -39,10 +43,20 @@ public class ApplicationService {
         return appRepository.findOne(id);
     }
 
+    @Cacheable("category_applications")
     public List<Application> getApplication(Category category){
         return appRepository.findByCategories(category);
     }
 
+    @Cacheable("top_applications")
+    public List<Application> getTopApplications(){
+        List<Application> applications = appRepository.findAll();
+        applications.sort((app1, app2) -> app2.getDownloadedTimes() - app1.getDownloadedTimes());
+
+        return applications;
+    }
+
+    @CacheEvict(value = {"all_applications", "category_applications", "top_applications"}, allEntries = true)
     public Application saveApplication(Application application, MultipartFile file) throws ApplicationExistsException, ZipException, IOException {
         // validation part
         String applicationName = application.getName();
@@ -75,6 +89,7 @@ public class ApplicationService {
         return appRepository.save(application);
     }
 
+    @CacheEvict(value = {"all_applications", "category_applications", "top_applications"}, allEntries = true)
     public void downloadApplication(HttpServletResponse response, Long appId){
         Application application = appRepository.findOne(appId);
 

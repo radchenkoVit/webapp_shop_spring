@@ -15,7 +15,7 @@ import system.service.UserDetailService;
 @Configuration
 @EnableWebSecurity
 @ComponentScan(basePackages = "system.service")
-public class SecurityConfig extends WebSecurityConfigurerAdapter {
+public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
 
     @Autowired
     private UserDetailService userDetailsService;
