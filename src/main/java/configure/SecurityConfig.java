@@ -1,49 +1,44 @@
 package configure;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Configuration;
-import org.springframework.context.annotation.Import;
+import org.springframework.security.authentication.dao.DaoAuthenticationProvider;
 import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
-
-import javax.sql.DataSource;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
+import system.service.UserDetailService;
 
 @Configuration
 @EnableWebSecurity
-@Import(DBConfiguration.class)
+@ComponentScan(basePackages = "system.service")
 public class SecurityConfig extends WebSecurityConfigurerAdapter {
 
-
-//    @Autowired
-//    private DataSource dataSource;
-//
-//    @Autowired
-//    public void configureGlobal(AuthenticationManagerBuilder auth) throws Exception {
-//        auth
-//                .jdbcAuthentication()
-//                .dataSource(dataSource)
-//                .withDefaultSchema()
-//                .withUser("user").password("password").roles("USER").and()
-//                .withUser("developer").password("password").roles("USER", "DEVELOPER");
-//    }
     @Autowired
-    public void configureGlobal(AuthenticationManagerBuilder authBuilder) throws Exception {
-        /*
-        * In memory authe definition by setting username and password
-        * */
+    private UserDetailService userDetailsService;
 
-        authBuilder.inMemoryAuthentication()
-                .withUser("user")
-                .password("password")
-                .roles("USER");
+    @Override
+    protected void configure(AuthenticationManagerBuilder auth)
+            throws Exception {
+        auth.authenticationProvider(authenticationProvider());
+    }
 
-        authBuilder.inMemoryAuthentication()
-                .withUser("developer")
-                .password("password")
-                .roles("DEVELOPER");
+    @Bean
+    public DaoAuthenticationProvider authenticationProvider() {
+        DaoAuthenticationProvider authProvider
+                = new DaoAuthenticationProvider();
+        authProvider.setUserDetailsService(userDetailsService);
+        authProvider.setPasswordEncoder(passwordEncoder());
+        return authProvider;
+    }
+
+    @Bean
+    public BCryptPasswordEncoder passwordEncoder() {
+        BCryptPasswordEncoder bCryptPasswordEncoder = new BCryptPasswordEncoder();
+        return bCryptPasswordEncoder;
     }
 
     @Override

@@ -15,8 +15,7 @@ import org.springframework.web.servlet.view.InternalResourceViewResolver;
 @EnableWebMvc
 @Configuration
 @ComponentScan({"system"})
-//@Import({DBConfiguration.class})
-@Import({SecurityConfig.class})
+@Import({DBConfiguration.class, SecurityConfig.class})
 public class AppConfiguration extends WebMvcConfigurerAdapter {
 
     // It's resolver for views looking for specific
