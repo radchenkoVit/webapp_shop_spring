@@ -15,7 +15,6 @@ import system.entity.Category;
 import system.exceptions.ApplicationExistsException;
 import system.repository.ApplicationRepository;
 import system.utils.ZipSaver;
-
 import javax.servlet.http.HttpServletResponse;
 import java.io.File;
 import java.io.FileFilter;
@@ -23,7 +22,6 @@ import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
-import java.util.Comparator;
 import java.util.List;
 
 @Service
